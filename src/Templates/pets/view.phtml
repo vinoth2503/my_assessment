@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Wipfli LLP</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+<h1 align="center">Pet Details</h1>
+
+<?php
+if($pet):
+?>
+<ul>
+  <li>$pet->petId</li>
+  <li>$pet->petName</li>
+  <li>$pet->breed</li>
+  <li>$pet->age</li>
+  <li>$pet->personality</li>
+  <li>$pet->phone</li>
+  <li>$pet->city</li>
+  <li>$pet->state</li>
+  <li>$pet->county</li>
+  <li>$pet->zip</li>
+  <li><div id="map"></div></li>
+</ul>
+<?php else: ?>
+<p>No pet found</p>
+<?php endif; ?>
+
+</body>
+</html>
+
+<script>
+document.body.onclick(function(){
+    var myVariable = <?php echo(json_encode($myVariable)); ?>;
+};
+function myMap() {
+    var mapProp= {
+        center:new google.maps.LatLng(lat, lon),
+        zoom:5,
+    };
+    var map = new google.maps.Map(document.getElementById("map"),mapProp);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=myMap"></script>
