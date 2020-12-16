@@ -24,4 +24,13 @@ Run this command in the application directory to run the test suite
 composer test
 ```
 
-That's it!
+
+As of now, you can see the result by accessing the following urls:
+```
+`http://localhost:8080/pets`
+`http://localhost:8080/pets/{id}`
+`http://localhost:8080/pets?search_term={string}`
+`http://localhost:8080/pets?breed={string}&age={string}&personality={string}&city={string}&state={string}&county={string}&zip={string}`
+```
+
+That's it so far!
