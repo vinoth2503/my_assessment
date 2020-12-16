@@ -50,20 +50,20 @@ class InMemoryPetRepository implements PetRepository
     public function findPetOfId(int $id): array
     {
         // using PHP filter
-        foreach ($this->pets['data'] as $pet) {
-            if ($pet['petId'] === $id) {
-                return $pet;
-            }
-        }
-        throw new PetNotFoundException();
-        // $statement = $this->db->prepare("SELECT p.id as petId, p.name as petName, p.breed, p.age, p.personality, l.id as locationId, l.name as locationName, l.address, l.city, l.state, l.zip, l.phone, l.county, l.latitude, l.longitude FROM pets p LEFT JOIN locations l ON p.shelter_id=l.id WHERE p.id=:id");
-        // $statement->execute(['id' => $id]);
-        // $pet = $statement->fetch(\PDO::FETCH_ASSOC);
-        // if ($pet) {
-        //     return $pet;
-        // } else {
-        //     throw new PetNotFoundException();
+        // foreach ($this->pets['data'] as $pet) {
+        //     if ($pet['petId'] === $id) {
+        //         return $pet;
+        //     }
         // }
+        // throw new PetNotFoundException();
+        $statement = $this->db->prepare("SELECT p.id as petId, p.name as petName, p.breed, p.age, p.personality, l.id as locationId, l.name as locationName, l.address, l.city, l.state, l.zip, l.phone, l.county, l.latitude, l.longitude FROM pets p LEFT JOIN locations l ON p.shelter_id=l.id WHERE p.id=:id");
+        $statement->execute(['id' => $id]);
+        $pet = $statement->fetch(\PDO::FETCH_ASSOC);
+        if ($pet) {
+            return $pet;
+        } else {
+            throw new PetNotFoundException();
+        }
     }
 
     public function findBySearchAndFilter(array $options): array
